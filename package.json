@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./ReactApp/",
+  "homepage": "https://ngheolahen.github.io/ReactApp/",
   "keywords": [],
   "description": "",
   "dependencies": {
