@@ -4,7 +4,8 @@ const instance = axios.create({
   withCredentials: false,
   headers: {
     "Accept": "application/json",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin":"*"
   }
 })
 instance.interceptors.response.use(
