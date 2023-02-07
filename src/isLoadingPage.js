@@ -1,4 +1,3 @@
-import "./index.css"
 function LoadingPage(isLoading) {
     if (isLoading) {
         return (

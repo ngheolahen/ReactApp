@@ -2,13 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink } from "react-router-dom";
 import Cookies from 'universal-cookie';
 import { apiListRegion } from "../../api/apiLogin";
+import LoadingPage from "../../isLoadingPage"
+import { useNavigate } from "react-router-dom";
+
 function Header() {
+  const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
   const cookies = new Cookies();
   const [regionSelect, setRegionSelect] = useState(sessionStorage.getItem("regionID"));
   const [dataRegion, setData] = useState([]);
   const ddlRegion_selected = (item) => {
+    setLoading(true);
     sessionStorage.setItem("regionID", item.target.value);
     setRegionSelect(item.target.value);
+    console.log(item.target.value);
+    setLoading(false);
+    //navigate("/");
+    window.location.reload();
+    setLoading(true);
   };
   const getListRegion = async () => {
     const region = await apiListRegion();
@@ -42,11 +53,8 @@ function Header() {
       getListRegion();
     }
     catch (err) {
-
     }
-
   }, [isLoad]);
-
   const [addClass, isStatus] = useState(false);
   const toggle = () => {
     isStatus(!addClass);
@@ -62,8 +70,10 @@ function Header() {
     sessionStorage.clear();
   }
 
+
   return (
     <>
+      {LoadingPage(isLoading)}
       <header id="header" className="header fixed-top d-flex align-items-center">
         <div className="d-flex align-items-center justify-content-between">
           <a href="/" className="logo d-flex align-items-center">

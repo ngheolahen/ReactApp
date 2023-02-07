@@ -11,13 +11,20 @@ import App from './App';
 import Login from './components/Login/Login.js';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { legacy_createStore as createStore } from "redux";
+import { Provider } from "react-redux";
+import allReducers from "./reducers/allReducers";
+const store = createStore(allReducers);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<App />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
-        </Routes>
+    <Provider store={store}>
+      <Routes>
+        <Route path="*" element={<App />}></Route>
+        <Route path="/Login" element={<Login />}></Route>
+      </Routes>
+    </Provider>
   </BrowserRouter>
 );
 reportWebVitals(); 

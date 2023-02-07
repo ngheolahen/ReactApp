@@ -4,6 +4,7 @@ import BodyLeft from './components/_layout/body-left';
 import Footer from './components/_layout/footer';
 import RenderBody from './router/renderBody';
 import './App.css';
+import './index.css';
 import { Outlet } from "react-router-dom";
 
 export default class App extends React.Component {
