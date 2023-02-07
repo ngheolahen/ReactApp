@@ -22,7 +22,7 @@ root.render(
     <Provider store={store}>
       <Routes>
         <Route path="*" element={<App />}></Route>
-        <Route path="/Login" element={<Login />}></Route>
+        <Route path="/login" element={<Login />}></Route>
       </Routes>
     </Provider>
   </BrowserRouter>
