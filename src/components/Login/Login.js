@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { apiListRegion, apiLogin } from "../../api/apiLogin";
-
+import LoadingPage from "../../isLoadingPage"
 function Login() {
     const [errorMessages, setErrorMessages] = useState({});
     const [dataRegion, setData] = useState([]);
     const [dataddlRegion, setValue] = useState({});
     const errors = { messageError: "Sai thông tin đăng nhập" };
     const navigate = useNavigate();
+    const [isLoading, setLoaging] = useState(false);
     const handleSubmit = async (event) => {
+        setLoaging(true)
         event.preventDefault();
         var { username, password } = document.forms[0];
         const data = await apiLogin(username.value, password.value);
@@ -19,6 +21,7 @@ function Login() {
         } else {
             setErrorMessages({ name: "messageError", message: errors.messageError });
         }
+        setLoaging(false)
     };
     const renderErrorMessage = (name) =>
         name === errorMessages.name && (
@@ -27,8 +30,10 @@ function Login() {
             </div>
         );
     const getListRegion = async () => {
+        setLoaging(true)
         const region = await apiListRegion();
         setData(region);
+        setLoaging(false)
     }
     const ddlRegion_selected = (item) => {
         setValue(item.target.value);
@@ -43,6 +48,7 @@ function Login() {
     }, []);
     return (
         <>
+            {LoadingPage(isLoading)}
             <main>
                 <div className="container">
                     <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">

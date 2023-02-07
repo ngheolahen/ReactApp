@@ -27,18 +27,24 @@ function Header() {
   };
   const [isLoad, setLoad] = useState(true);
   useEffect(() => {
-    if (isLoad) {
-      var addScript = document.createElement("script");
-      addScript.setAttribute(
-        "src",
-        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-      );
-      document.body.appendChild(addScript);
-      window.googleTranslateElementInit = googleTranslateElementInit;
-      setLoad(false);
-      toggle();
+    try {
+      if (isLoad) {
+        var addScript = document.createElement("script");
+        addScript.setAttribute(
+          "src",
+          "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+        );
+        document.body.appendChild(addScript);
+        window.googleTranslateElementInit = googleTranslateElementInit;
+        setLoad(false);
+        toggle();
+      }
+      getListRegion();
     }
-    getListRegion();
+    catch (err) {
+
+    }
+
   }, [isLoad]);
 
   const [addClass, isStatus] = useState(false);
